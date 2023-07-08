@@ -1,4 +1,4 @@
-
+import Typewriter from 'typewriter-effect';
 import React, { useState } from 'react'
 import axios from 'axios'
 import './App.css';
@@ -30,6 +30,13 @@ function App() {
 
         </form>
       </div>
+      {data.name === undefined && <div className='type'> <Typewriter
+        options={{
+          strings: ['Enter a location to know the weather data'],
+          autoStart: true,
+          loop: true,
+        }}
+      /></div>}
       <div className="app-data">
 
         <div className="data">
@@ -47,17 +54,19 @@ function App() {
           <div className="info">
             {data.weather ? <p>{data.weather[0].main}</p> : null}
           </div>
-        </div>
-        <div className="sun">
-          <div>
-            <p>Sunrise 🌅</p>
-            {data.sys ? <p className='bold'>{new Date(data.sys.sunrise * 1000).toLocaleString()}</p> : null}
-          </div>
-          <div>
-            <p>Sunset 🌇</p>
-            {data.sys ? <p className='bold'>{new Date(data.sys.sunset * 1000).toLocaleString()}</p> : null}
-          </div>
-        </div>
+        </div>{
+          data.name !== undefined &&
+
+          <div className="sun">
+            <div>
+              <p>Sunrise 🌅</p>
+              {data.sys ? <p className='bold'>{new Date(data.sys.sunrise * 1000).toLocaleString()}</p> : null}
+            </div>
+            <div>
+              <p>Sunset 🌇</p>
+              {data.sys ? <p className='bold'>{new Date(data.sys.sunset * 1000).toLocaleString()}</p> : null}
+            </div>
+          </div>}
         {data.name !== undefined && (
           <div className="footer">
             <div>
